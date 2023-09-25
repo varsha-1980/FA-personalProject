@@ -6,9 +6,22 @@ spring:
    jackson:
       deserialization:
         ADJUST_DATES_TO_CONTEXT_TIME_ZONE : false
+
+   mail:
+     host: smtp.gmail.com
+     port: 587
+     username: "onboardingsagarsoft@gmail.com"
+     password: "wuoqyizvdfwrjnwf"
+     properties:
+       mail:
+         smtp:
+           auth: true
+           starttls:
+             enable: true
 app:
    message: This is the primary Application Property for ${spring.application.name}
 server:
+  port : 9898
   servlet:
     context-path: /FailureAnalysis
 

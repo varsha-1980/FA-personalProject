@@ -27,7 +27,8 @@
 								<div class="col-md-10">
 									<input class="form-control form-control-sm custom-select custom-select-sm" type="text"
 										th:field="*{dbs_cost}" list="costs"
-										placeholder="Select Costs"></input>
+										placeholder="Select Costs"
+										   th:attr="placeholder=#{label.placeholder.select_cost}"></input>
 									<datalist id="costs">
 										<option th:each="_c: ${costsList}" th:value="${_c.cst_price}"
 											th:text="${_c.cst_price}"></option>

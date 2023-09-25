@@ -86,7 +86,7 @@
 											class="form-control form-control-sm" autocomplete="off"
 											th:field="*{dbs_res_start}"
 											onchange="validateEvaluationStartDate(this);"
-											th:attr="placeholder=#{label.tab1.place.select_date}"></input>
+											th:attr="placeholder=#{label.tab1.place.select_evaluation_date}"></input>
 										<div class="input-group-append">
 											<span class="input-group-text"><i
 												class="fa fa-calendar"></i></span>
@@ -118,7 +118,7 @@
 										<input type="text" id="date_analysis_finished"
 											class="form-control form-control-sm" autocomplete="off"
 											th:field="*{dbs_res_stop}"
-											th:attr="placeholder=#{label.tab1.place.select_date}"
+											th:attr="placeholder=#{label.tab1.place.select_evaluation_stop_date }"
 											onchange="validateEvaluationStopDate(this);"></input>
 										<div class="input-group-append">
 											<span class="input-group-text"><i
@@ -141,7 +141,8 @@
 								<div class="col-md-8">
 									<input class="form-control form-control-sm custom-select custom-select-sm" type="text"
 										th:field="*{dbs_res_name}" list="evaluator"
-										placeholder="Select Evaluator"></input>
+										placeholder="Select Evaluator"
+										   th:attr="placeholder=#{label.search.placeholder.select_evaluator}"></input>
 									<datalist id="evaluator">
 										<option th:each="_p: ${evaluatorList}"
 											th:value="${_p.pers_short}" th:text="${_p.pers_short}"></option>
@@ -155,13 +156,14 @@
 									<label for="inputEmail4"><span
 										th:text="#{label.editpage.tab7.processing_status}">Processing
 											Status</span><a href="#" data-toggle="tooltip" data-placement="top"
-										th:title="#{label.tooltip.processing_status}"><i
+										th:title="#{label.tooltip.processing_status_fa}"><i
 											class="fa fa-info-circle ml-1" aria-hidden="true"></i> </a></label>
 								</div>
 								<div class="col-md-8">
 									<input class="form-control form-control-sm custom-select custom-select-sm" type="text"
 										th:field="*{dbs_status}" list="p_status"
-										placeholder="Select Status"></input>
+										placeholder="Select Status"
+										   th:attr="placeholder=#{label.search.placeholder.select.status}"></input>
 									<datalist id="p_status">
 										<option th:each="_st: ${processStatusList}"
 											th:value="__${#locale}__ == 'de' ? ${_st.nameDe} : ${_st.name}"
@@ -181,7 +183,7 @@
 								</div>
 								<div class="col-md-10">
 									<textarea rows="5" name="comment" th:field="*{dbs_res_text}"
-										th:attr="placeholder=#{label.enter_text_here}"></textarea>
+										th:attr="placeholder=#{label.enter_result_analysis_reason}"></textarea>
 								</div>
 							</div>
 						</div>
