@@ -204,7 +204,7 @@
 											class="fa fa-info-circle ml-1" aria-hidden="true"></i> </a></label>
 								</div>
 								<div class="col-md-8">
-									<input
+								<!--	<input
 											class="form-control form-control-sm custom-select custom-select-sm"
 											type="text" th:field="*{dbs_status}" list="p_status"
 											placeholder="Select Status"
@@ -213,7 +213,15 @@
 										<option th:each="_st: ${processStatusList}"
 												th:value="__${#locale}__ == 'de' ? ${_st.nameDe} : ${_st.name}"
 												th:text="__${#locale}__ == 'de' ? ${_st.nameDe} : ${_st.name}"></option>
-									</datalist>
+									</datalist>-->
+
+									<select class="form-control form-control-sm custom-select custom-select-sm" type="text"
+											th:field="*{dbs_status}" th:label="#{label.search.placeholder.select.status}">
+										<option value="" th:label="#{label.search.placeholder.select.status}" ></option>
+										<option th:each="_st: ${processStatusList}"
+												th:value="__${#locale}__ == 'de' ? ${_st.nameDe} : ${_st.name}"
+												th:text="__${#locale}__ == 'de' ? ${_st.nameDe} : ${_st.name}"></option>
+									</select>
 								</div>
 							</div>
 

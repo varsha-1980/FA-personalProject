@@ -33,26 +33,50 @@
 
 								<div class="row">
 									<div class="col-md-4 d-flex">
-										<ul
-											class="list-group blockquote list-inline mx-md-auto justify-content-center">
+										<ul class="list-group blockquote list-inline mx-md-auto justify-content-center">
+											<!--class="list-group blockquote list-inline mx-md-auto justify-content-center">
 											<li class="list-group-item border-0 row"><a
 												th:href="@{/orderdetails/create}"> <i class="fa fa-file"><span
 														class="ml-1" th:text="#{label.menupage.create_new_order}">Create
 															a new order</span></i></a></li>
 
-											<!-- <li class="list-group-item border-0 row"><a th:href="@{#}"> <i
+											&lt;!&ndash; <li class="list-group-item border-0 row"><a th:href="@{#}"> <i
 													class="fa fa-list-alt"><span class="ml-1"
-														th:text="#{label.menupage.my_orders_form}">my_orders_form</span></i></a></li> -->
+														th:text="#{label.menupage.my_orders_form}">my_orders_form</span></i></a></li> &ndash;&gt;
 											<li class="list-group-item border-0 row"><a
 												th:href="@{/orderdetails}"> <i class="fa fa-table"><span
 														class="ml-1" th:text="#{label.menupage.my_orders_table}">My
-															orders (table)</span></i></a></li>
+															orders (table)</span></i></a></li>-->
+
+
+
+								<li class="list-group-item border-0 row"><a
+									th:href="@{/orderdetails/create}"> <i class="fa fa-file"><span
+									class="ml-1" th:text="#{label.menupage.create_new_order}">Create
+															a new order</span></i></a> <br><br></li>
+
+
+
+							<li class="list-group-item border-0 row"><a
+									th:href="@{/orderdetails(fromLink=${'search'})}"> <i
+									class="fa fa-search"><span class="ml-1"
+															   th:text="#{label.menupage.search_for_orders}">Search
+															for an order</span></i></a><br><br></li>
+
+
+							<!-- <li class="list-group-item border-0 row"><a th:href="@{#}"> <i
+                                    class="fa fa-list-alt"><span class="ml-1"
+                                        th:text="#{label.menupage.my_orders_form}">my_orders_form</span></i></a></li> -->
+							<li class="list-group-item border-0 row"><a
+									th:href="@{/orderdetails}"> <i class="fa fa-table"><span
+									class="ml-1" th:text="#{label.menupage.my_orders_table}">My
+															orders <!--(table)--></span></i></a></li>
 										</ul>
 									</div>
 									<div class="col-md-4 d-flex">
 										<ul
 											class="list-group blockquote list-inline mx-md-auto justify-content-center">
-											<li class="list-group-item border-0 row "><a
+											<!--<li class="list-group-item border-0 row "><a
 												th:href="@{/orderdetails(fromLink=${'All Open Orders'})}">
 													<i class="fa fa-table"><span class="ml-1"
 														th:text="#{label.menupage.all_open_oders}">All open
@@ -62,7 +86,55 @@
 												th:href="@{/orderdetails(fromLink=${'search'})}"> <i
 													class="fa fa-search"><span class="ml-1"
 														th:text="#{label.menupage.search_for_orders}">Search
-															for an order</span></i></a></li>
+															for an order</span></i></a></li>-->
+
+
+											<li class="list-group-item border-0 row"><a
+													th:href="@{/orderdetails(fromLink=${'Electrical Measurement'})}"> <i
+													class="fa fa-table"><span class="ml-1"
+																			  th:text="#{label.menupage.electrical_measurement}">Electrical measurement </span></i></a></li>
+
+
+
+											<li class="list-group-item border-0 row"><a
+													th:href="@{/orderdetails(fromLink=${'Hotspot / IR / LC'})}"> <i
+													class="fa fa-table"><span class="ml-1"
+																			  th:text="#{label.menuage.hotspotp_ir/lc}">Hotspot IR / LC </span></i></a></li>
+
+											<li class="list-group-item border-0 row"><a
+													th:href="@{/orderdetails(fromLink=${'Chemical Preparation'})}"> <i
+													class="fa fa-table">
+												<span class="ml-1" th:text="#{label.menupage.chemical_preparaion}">Chemical Preparation</span></i></a></li>
+
+
+
+											<!-- <li class="list-group-item border-0 row"><a th:href="@{/orderdetails(fromLink=${'search'})}"> <i
+                                                    class="fa fa-table"><span class="ml-1"
+                                                        th:text="#{label.menupage.open_orders_ex_service}">Open orders ext. service</span></i></a></li> -->
+											<li class="list-group-item border-0 row"><a
+													th:href="@{/orderdetails(fromLink=${'REM / FIB / EDX'})}"> <i
+													class="fa fa-table"><span class="ml-1"
+																			  th:text="#{label.menupage.REM_FIB_EDX}">REM / FIB / EDX</span></i></a></li>
+
+											<li class="list-group-item border-0 row"><a
+													th:href="@{/orderdetails(fromLink=${'Cuts'})}"> <i
+													class="fa fa-table"><span class="ml-1"
+																			  th:text="#{label.menupage.Cuts}">Cuts</span></i></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 											<!-- <li class="list-group-item border-0 row"><a th:href="@{/orderdetails(fromLink=${'search'})}"> <i
 													class="fa fa-table"><span class="ml-1"
@@ -73,7 +145,7 @@
 									<div class="col-md-4 d-flex">
 										<ul
 											class="list-group blockquote list-inline mx-md-auto justify-content-center">
-											<li class="list-group-item border-0 row"><a
+											<!--<li class="list-group-item border-0 row"><a
 												th:href="@{/orderdetails(fromLink=${'Open FA Orders'})}">
 													<i class="fa fa-table"><span class="ml-1"
 														th:text="#{label.menupage.open_orders_dept_fa}">Open
@@ -84,7 +156,46 @@
 													<i class="fa fa-table"><span class="ml-1"
 														th:text="#{label.menupage.orders_for_evaluation}">Orders
 															for evaluation</span></i>
+											</a></li>-->
+
+
+
+											<li class="list-group-item border-0 row"><a
+													th:href="@{/orderdetails(fromLink=${'All New Orders'})}">
+												<i class="fa fa-table"><span class="ml-1"
+																			 th:text="#{label.menupage.all_new_orders}">All New orders</span></i>
 											</a></li>
+
+
+											<li class="list-group-item border-0 row "><a
+													th:href="@{/orderdetails(fromLink=${'All Open Orders'})}">
+												<i class="fa fa-table"><span class="ml-1"
+																			 th:text="#{label.menupage.all_open_oders}">All open
+															orders</span></i>
+											</a></li>
+
+											<li class="list-group-item border-0 row"><a
+													th:href="@{/orderdetails(fromLink=${'Evaluation Orders'})}">
+												<i class="fa fa-table"><span class="ml-1"
+																			 th:text="#{label.menupage.orders_for_evaluation}">Orders
+															for evaluation</span></i>
+											</a></li>
+
+
+											<li class="list-group-item border-0 row "><a
+													th:href="@{/orderdetails(fromLink=${'Orders Material /Info Missing'})}">
+												<i class="fa fa-table"><span class="ml-1"
+																			 th:text="#{label.menupage.order_material}">Orders material / info is missing</span></i>
+											</a></li>
+
+
+
+
+
+
+
+
+
 										</ul>
 									</div>
 									<!-- <div class="col-md-4 d-flex">

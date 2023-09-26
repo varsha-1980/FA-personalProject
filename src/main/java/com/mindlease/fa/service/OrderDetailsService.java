@@ -823,8 +823,21 @@ public class OrderDetailsService {
 			sb.append(" and (od.dbs_status!='Auftrag abgeschlosse' or od.dbs_status!='Order completed') and (od.dbs_status='FA in Bearbeitung' or od.dbs_status='FA in progress')");
 		} else if(sourceLink.equalsIgnoreCase("Evaluation Orders")) {
 			sb.append(" and (od.dbs_status='FA erledigt - Bitte Ergebnis bewerte' or od.dbs_status='FA done - please rate the result')");
+		} else if(sourceLink.equalsIgnoreCase("Chemical Preparation")){
+			sb.append(" and (od.dbs_status='Wartet auf Ätzung' or od.dbs_status='Waiting for Etching')");
+		}else if(sourceLink.equalsIgnoreCase("Electrical Measurement")){
+			sb.append(" and (od.dbs_status='Wartet auf elektr. Messung' or od.dbs_status='Waiting for electr. Measurement')");
 		}
-		
+		else if(sourceLink.equalsIgnoreCase("Hotspot / IR / LC")){
+			sb.append(" and (od.dbs_status='Wartet auf Hotspot IR/LC' or od.dbs_status='Waiting for Hotspot IR/LC')");}
+		else if(sourceLink.equalsIgnoreCase("REM / FIB / EDX")){
+			sb.append(" and (od.dbs_status='Wartet auf REM/FIB/EDX' or od.dbs_status='Waiting for REM/FIB/EDX')");}
+		else if(sourceLink.equalsIgnoreCase("Cuts")){
+			sb.append(" and (od.dbs_status='Wartet auf Schliff' or od.dbs_status='Waiting for cuts')");}
+		else if(sourceLink.equalsIgnoreCase("Orders Material /Info Missing")){
+			sb.append(" and (od.dbs_status='Material/Info fehlt' or od.dbs_status='Material / info missing')");}
+
+
 		String[] activeProfiles = environment.getActiveProfiles(); // it will return String Array of all active profile.
 		String profileName = "dev";
 		if (activeProfiles != null && activeProfiles.length > 0) {

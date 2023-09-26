@@ -1,377 +1,377 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
 <title>OrdersList</title>
 
 <body>
-    <div layout:fragment="content">
-        <div class="card mt-1 p-3 h-100">
+<div layout:fragment="content">
+    <div class="card mt-1 p-3 h-100">
 
-            <div class="card-body h-100" th:switch="${orderDetailsList}">
-                <div th:if="${fromLink == 'search'}">
-
-
-
-                    <div>
-                        <form th:action="@{/orderdetails/search}" id="searchForm" th:object="${searchParameters}"
-                            method="post">
-
-                            <div class="ml-md-3">
-                                <div class="form-row p-3">
-
-                                    <p class="alert alert-danger alert-dismissible" th:if="${#fields.hasGlobalErrors()}"
-                                        th:each="error : ${#fields.errors('global')}" th:text="${error}"></p>
-
-
-                                    <!-- 						<div class="form-group col-md-3">
-									<label for="sCustomername" class="control-label"><span
-										th:text="#{label.sCustomername}">Customer Name</span></label> <input
-										id="sCustomername" class="form-control form-control-sm"
-										th:field="*{sCustomername}" placeholder="Customer Name" />
-								</div>
-
-								<div class="form-group col-md-3">
-									<label for="sStatus" class="control-label"><span
-										th:text="#{label.sStatus}">Status</span></label> <input id="sStatus"
-										class="form-control form-control-sm" th:field="*{sStatus}"
-										placeholder="Enter Status" />
-								</div>
-								<div class="form-group col-md-3">
-									<label for="sPriority" class="control-label"><span
-										th:text="#{label.sPriority}">Priority</span></label> <input
-										id="sPriority" class="form-control form-control-sm"
-										th:field="*{sPriority}" placeholder="Priority" />
-								</div>
-								<div class="form-group col-md-3">
-									<label for="sMaterial" class="control-label"><span
-										th:text="#{label.sMaterial}">Material</span></label> <input
-										id="sMaterial" class="form-control form-control-sm"
-										th:field="*{sMaterial}" placeholder="Material" />
-								</div>
-								<div class="form-group col-md-3">
-									<label for="sElectricalError" class="control-label"><span
-										th:text="#{label.sElectricalError}">Electrical Error</span></label> <input
-										id="sElectricalError" class="form-control form-control-sm"
-										th:field="*{sElectricalError}" placeholder="Electrical Error" />
-								</div>
-								<div class="form-group col-md-3">
-									<label for="sFailureMode" class="control-label"><span
-										th:text="#{label.sFailureMode}">Failure Mode</span></label> <input
-										id="sFailureMode" class="form-control form-control-sm"
-										th:field="*{sFailureMode}" placeholder="Enter Failure Mode" />
-								</div> -->
+        <div class="card-body h-100" th:switch="${orderDetailsList}">
+            <div th:if="${fromLink == 'search'}">
 
 
 
-                                    <div class="form-group col-md-4">
-                                        <div class="col-md-12">
-                                            <label for="inputPassword4"><span
-                                                    th:text="#{label.editpage.tab1.customer}">Client</span><a href="#"
-                                                    data-toggle="tooltip" data-placement="top"
-                                                    th:title="#{label.tooltip.client}"><i class="fa fa-info-circle ml-1"
-                                                        aria-hidden="true"></i> </a></label>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <input class="form-control form-control-sm custom-select custom-select-sm"
-                                                type="text" th:field="*{sCustomername}" list="client"
-                                                th:placeholder="#{label.search.placeholder.select.client}"></input>
-                                            <datalist id="client">
-                                                <option th:each="_customer: ${customersList}"
-                                                    th:value="${_customer.pers_short}"
-                                                    th:text="${_customer.pers_short}"></option>
-                                            </datalist>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <div class="col-md-12">
-                                            <label for="inputEmail4"><span
-                                                    th:text="#{label.editpage.tab9.processing_status}">
-                                                    Status</span><a href="#" data-toggle="tooltip" data-placement="top"
-                                                    th:title="#{label.tooltip.processing_status}"><i
-                                                        class="fa fa-info-circle ml-1" aria-hidden="true"></i>
-                                                </a></label>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <input class="form-control form-control-sm custom-select custom-select-sm"
-                                                type="text" th:field="*{sStatus}" list="p_status"
-                                                th:placeholder="#{label.search.placeholder.select.status}"></input>
-                                            <datalist id="p_status">
-                                                <option th:each="_st: ${processStatusList}" 
-                                                	th:value="__${#locale}__ == 'de' ? ${_st.nameDe} : ${_st.name}"
-                                                    th:text="__${#locale}__ == 'de' ? ${_st.nameDe} : ${_st.name}">
-                                                </option>
-                                            </datalist>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <div class="col-md-12">
-                                            <label for="inputPassword4"><span
-                                                    th:text="#{label.editpage.tab1.Priority}">Priority</span><a href="#"
-                                                    data-toggle="tooltip" data-placement="top"
-                                                    th:title="#{label.tooltip.priority}"><i
-                                                        class="fa fa-info-circle ml-1" aria-hidden="true"></i> </a>
-                                            </label>
-                                        </div>
-                                        <div class="col-md-8">
-											<input
-												class="form-control form-control-sm custom-select custom-select-sm"
-												type="text" th:field="*{sPriority}" list="priority"
-												th:placeholder="#{label.search.placeholder.select.priority}"></input>
-											<datalist id="priority">
-												<option th:each="_prio: ${priorityList}"
-													th:value="${_prio.id}"
-													th:text="__${#locale}__ == 'de'? ${_prio.nameDe} : ${_prio.name}"
-													></option>
-											</datalist>
-										</div>
-								<!-- style="width: 370px;" -->
-                                        <!-- <div> -->
-                                        <!-- <label for="*{sPriority}" th:text="#{label.search.placeholder.select.priority}"></label> -->
-                                        <!-- <div class="col-md-8">
-                                            <select th:field="*{sPriority}"
-                                                class="form-control form-control-sm custom-select custom-select-sm">
-                                                <option>Select priority</option>
-									        	th:text="#{label.search.placeholder.select.priority}"
-									            th:value="" />
+                <div>
+                    <form th:action="@{/orderdetails/search}" id="searchForm" th:object="${searchParameters}"
+                          method="post">
 
-                                                <option th:each="_prio: ${priorityList}"
-                                                    th:text="__${#locale}__ == 'de'? ${_prio.nameDe} : ${_prio.name}"
-                                                    th:value="${_prio.id}"
-                                                    th:selected="(${_prio.id == 2}) ? 'selected' : 'none'">
-                                            </select>
-                                        </div> -->
-                                        <!-- </div> -->
+                        <div class="ml-md-3">
+                            <div class="form-row p-3">
 
-                                    </div>
+                                <p class="alert alert-danger alert-dismissible" th:if="${#fields.hasGlobalErrors()}"
+                                   th:each="error : ${#fields.errors('global')}" th:text="${error}"></p>
 
 
-                                    <div class="form-group col-md-4">
-                                        <div class="col-md-12">
-                                            <label for="inputEmail4"><span
-                                                    th:text="#{label.editpage.tab1.type_of_sample_material}">Material
-                                                    Type</span><a href="#" data-toggle="tooltip" data-placement="top"
-                                                    th:title="#{label.tooltip.material_type}"><i
-                                                        class="fa fa-info-circle ml-1" aria-hidden="true"></i>
-                                                </a></label>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <input class="form-control form-control-sm custom-select custom-select-sm"
-                                                type="text" th:field="*{sMaterial}" list="material"
-                                                th:placeholder="#{label.search.placeholder.select.material.type}"></input>
-                                            <datalist id="material">
-                                                <option th:each="_material: ${materialsList}"
-                                                    th:value="__${#locale}__ == 'de' ? ${_material.nameDe} : ${_material.name}"
-                                                    th:text="__${#locale}__ == 'de' ? ${_material.nameDe} : ${_material.name}">
-                                                </option>
-                                            </datalist>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group col-md-4">
-                                        <div class="col-md-12">
-                                            <label for="inputEmail4"><span
-                                                    th:text="#{label.editpage.tab3.electrical_error}">Electrical
-                                                    Failure</span><a href="#" data-toggle="tooltip" data-placement="top"
-                                                    th:title="#{label.tooltip.electrical_error}"><i
-                                                        class="fa fa-info-circle ml-1" aria-hidden="true"></i>
-                                                </a></label>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <input class="form-control form-control-sm custom-select custom-select-sm"
-                                                type="text" th:field="*{sElectricalError}" list="e_error"
-                                                th:placeholder="#{label.search.placeholder.select.electric.error}"></input>
-                                            <datalist id="e_error">
-                                                <option th:each="_err: ${electricErrorList}" 
-                                                	th:value="__${#locale}__ == 'de' ? ${_err.nameDe}  : ${_err.name}"
-                                                    th:text="__${#locale}__ == 'de' ? ${_err.nameDe}  : ${_err.name}">
-                                                </option>
-                                            </datalist>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="form-group col-md-4">
-                                        <div class="col-md-12">
-                                            <label for="inputEmail4"><span
-                                                    th:text="#{label.editpage.tab3.error_mode}">Failure
-                                                    Mode</span><a href="#" data-toggle="tooltip" data-placement="top"
-                                                    th:title="#{label.tooltip.error_mode}"><i
-                                                        class="fa fa-info-circle ml-1" aria-hidden="true"></i>
-                                                </a></label>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <input class="form-control form-control-sm custom-select custom-select-sm"
-                                                type="text" th:field="*{sFailureMode}" list="e_mode"
-                                                th:placeholder="#{label.search.placeholder.select.e.mode}"></input>
-                                            <datalist id="e_mode">
-                                                <option th:each="_errorMode: ${failureModeList}"
-                                                    th:value="__${#locale}__ == 'de' ? ${_errorMode.nameDe} : ${_errorMode.name}"
-                                                    th:text="__${#locale}__ == 'de' ? ${_errorMode.nameDe} : ${_errorMode.name}">
-                                                </option>
-                                            </datalist>
-                                        </div>
-                                    </div>
-                                    
-                                <div class="form-group col-md-4">
-								<div class="col-md-12">
-									<label for="inputEmail4"><span
-										th:text="#{label.editpage.tab7.archive_wafer_box}">Archive
-											wafer box</span><a href="#" data-toggle="tooltip"
-										data-placement="top"
-										th:title="#{label.tooltip.archive_wafer_box}"><i
-											class="fa fa-info-circle ml-1" aria-hidden="true"></i> </a></label>
-								</div>
-								<div class="col-md-8">
-									<input class="form-control form-control-sm custom-select custom-select-sm" type="text"
-										th:field="*{sArchWaferBox}" list="archive_wf"
-										placeholder="Select Archive Wf.box"></input>
-									<datalist id="archive_wf">
-										<option th:each="_arch: ${archiveList}"
-											th:value="__${#locale}__ == 'de' ? ${_arch.nameDe} : ${_arch.name}"
-											th:text="__${#locale}__ == 'de' ? ${_arch.nameDe} : ${_arch.name}"></option>
-									</datalist>
-								</div>
-							</div>
-							<div class="form-group col-md-4">
-								<div class="col-md-12">
-									<label for="inputEmail4"><span
-										th:text="#{label.editpage.tab7.archive_polystyrene_box}">Archive
-											polystyrene box</span><a href="#" data-toggle="tooltip"
-										data-placement="top"
-										th:title="#{label.tooltip.archive_poly_box}"><i
-											class="fa fa-info-circle ml-1" aria-hidden="true"></i> </a></label>
-								</div>
-								<div class="col-md-8">
-									<input class="form-control form-control-sm custom-select custom-select-sm" type="text"
-										th:field="*{sArchPolyBox}" list="archive_poly"
-										placeholder="Select Archive P.box"></input>
-									<datalist id="archive_poly">
-										<option th:each="_arch: ${archiveList}"
-											th:value="__${#locale}__ == 'de' ? ${_arch.nameDe} : ${_arch.name}"
-											th:text="__${#locale}__ == 'de' ? ${_arch.nameDe} : ${_arch.name}"></option>
-									</datalist>
-								</div>
-							</div>
-                                    
-                                   
-
-
-                                    <div class="alert alert-danger pull-right" th:if="${flash_searchresults}"
-                                        th:text="${flash_searchresults}"></div>
-                                    <input type="hidden" id="ln" name="ln" th:value="__${#locale}__"></input> <input
-                                        type="hidden" id="pageSize" name="pageSize"
-                                        th:value="${#request.getParameter('pageSize')}"></input> <input type="hidden"
-                                        id="page" name="page" th:value="${#request.getParameter('page')}"></input>
-                                    <input type="hidden" id="fromLink" name="fromLink"
-                                        th:value="${#request.getParameter('fromLink')}"></input>
-
-
-                                    <div class="form-group col-md-3"></div>
-                                    <div class="form-group col-md-3">
-                                        <!--<button type="submit" class="btn btnbgcolor">
-											<span th:text="#{label.Search}">Search</span>
-										</button>-->
-                                        <button type="button" class="btn btnbgcolor" id="search-button">
-                                            <span th:text="#{label.Search}">Search</span>
-                                        </button>
-
-                                        <a th:href="@{/orderdetails(fromLink=${'search'})}"><button type="button"
-                                                class="btn btnbgcolor">
-                                                <span th:text="#{label.cancel}">Cancel</span>
-                                            </button></a>
-                                    </div>
-
-
-                                </div>
+                                <!-- 						<div class="form-group col-md-3">
+                                <label for="sCustomername" class="control-label"><span
+                                    th:text="#{label.sCustomername}">Customer Name</span></label> <input
+                                    id="sCustomername" class="form-control form-control-sm"
+                                    th:field="*{sCustomername}" placeholder="Customer Name" />
                             </div>
 
-                        </form>
-                    </div>
+                            <div class="form-group col-md-3">
+                                <label for="sStatus" class="control-label"><span
+                                    th:text="#{label.sStatus}">Status</span></label> <input id="sStatus"
+                                    class="form-control form-control-sm" th:field="*{sStatus}"
+                                    placeholder="Enter Status" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="sPriority" class="control-label"><span
+                                    th:text="#{label.sPriority}">Priority</span></label> <input
+                                    id="sPriority" class="form-control form-control-sm"
+                                    th:field="*{sPriority}" placeholder="Priority" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="sMaterial" class="control-label"><span
+                                    th:text="#{label.sMaterial}">Material</span></label> <input
+                                    id="sMaterial" class="form-control form-control-sm"
+                                    th:field="*{sMaterial}" placeholder="Material" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="sElectricalError" class="control-label"><span
+                                    th:text="#{label.sElectricalError}">Electrical Error</span></label> <input
+                                    id="sElectricalError" class="form-control form-control-sm"
+                                    th:field="*{sElectricalError}" placeholder="Electrical Error" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="sFailureMode" class="control-label"><span
+                                    th:text="#{label.sFailureMode}">Failure Mode</span></label> <input
+                                    id="sFailureMode" class="form-control form-control-sm"
+                                    th:field="*{sFailureMode}" placeholder="Enter Failure Mode" />
+                            </div> -->
+
+
+
+                                <div class="form-group col-md-4">
+                                    <div class="col-md-12">
+                                        <label for="inputPassword4"><span
+                                                th:text="#{label.editpage.tab1.customer}">Client</span><a href="#"
+                                                                                                          data-toggle="tooltip" data-placement="top"
+                                                                                                          th:title="#{label.tooltip.client}"><i class="fa fa-info-circle ml-1"
+                                                                                                                                                aria-hidden="true"></i> </a></label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control form-control-sm custom-select custom-select-sm"
+                                               type="text" th:field="*{sCustomername}" list="client"
+                                               th:placeholder="#{label.search.placeholder.select.client}"></input>
+                                        <datalist id="client">
+                                            <option th:each="_customer: ${customersList}"
+                                                    th:value="${_customer.pers_short}"
+                                                    th:text="${_customer.pers_short}"></option>
+                                        </datalist>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <div class="col-md-12">
+                                        <label for="inputEmail4"><span
+                                                th:text="#{label.editpage.tab9.processing_status}">
+                                                    Status</span><a href="#" data-toggle="tooltip" data-placement="top"
+                                                                    th:title="#{label.tooltip.processing_status}"><i
+                                                class="fa fa-info-circle ml-1" aria-hidden="true"></i>
+                                        </a></label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control form-control-sm custom-select custom-select-sm"
+                                               type="text" th:field="*{sStatus}" list="p_status"
+                                               th:placeholder="#{label.search.placeholder.select.status}"></input>
+                                        <datalist id="p_status">
+                                            <option th:each="_st: ${processStatusList}"
+                                                    th:value="__${#locale}__ == 'de' ? ${_st.nameDe} : ${_st.name}"
+                                                    th:text="__${#locale}__ == 'de' ? ${_st.nameDe} : ${_st.name}">
+                                            </option>
+                                        </datalist>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <div class="col-md-12">
+                                        <label for="inputPassword4"><span
+                                                th:text="#{label.editpage.tab1.Priority}">Priority</span><a href="#"
+                                                                                                            data-toggle="tooltip" data-placement="top"
+                                                                                                            th:title="#{label.tooltip.priority}"><i
+                                                class="fa fa-info-circle ml-1" aria-hidden="true"></i> </a>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input
+                                                class="form-control form-control-sm custom-select custom-select-sm"
+                                                type="text" th:field="*{sPriority}" list="priority"
+                                                th:placeholder="#{label.search.placeholder.select.priority}"></input>
+                                        <datalist id="priority">
+                                            <option th:each="_prio: ${priorityList}"
+                                                    th:value="${_prio.id}"
+                                                    th:text="__${#locale}__ == 'de'? ${_prio.nameDe} : ${_prio.name}"
+                                            ></option>
+                                        </datalist>
+                                    </div>
+                                    <!-- style="width: 370px;" -->
+                                    <!-- <div> -->
+                                    <!-- <label for="*{sPriority}" th:text="#{label.search.placeholder.select.priority}"></label> -->
+                                    <!-- <div class="col-md-8">
+                                        <select th:field="*{sPriority}"
+                                            class="form-control form-control-sm custom-select custom-select-sm">
+                                            <option>Select priority</option>
+                                            th:text="#{label.search.placeholder.select.priority}"
+                                            th:value="" />
+
+                                            <option th:each="_prio: ${priorityList}"
+                                                th:text="__${#locale}__ == 'de'? ${_prio.nameDe} : ${_prio.name}"
+                                                th:value="${_prio.id}"
+                                                th:selected="(${_prio.id == 2}) ? 'selected' : 'none'">
+                                        </select>
+                                    </div> -->
+                                    <!-- </div> -->
+
+                                </div>
+
+
+                                <div class="form-group col-md-4">
+                                    <div class="col-md-12">
+                                        <label for="inputEmail4"><span
+                                                th:text="#{label.editpage.tab1.type_of_sample_material}">Material
+                                                    Type</span><a href="#" data-toggle="tooltip" data-placement="top"
+                                                                  th:title="#{label.tooltip.material_type}"><i
+                                                class="fa fa-info-circle ml-1" aria-hidden="true"></i>
+                                        </a></label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control form-control-sm custom-select custom-select-sm"
+                                               type="text" th:field="*{sMaterial}" list="material"
+                                               th:placeholder="#{label.search.placeholder.select.material.type}"></input>
+                                        <datalist id="material">
+                                            <option th:each="_material: ${materialsList}"
+                                                    th:value="__${#locale}__ == 'de' ? ${_material.nameDe} : ${_material.name}"
+                                                    th:text="__${#locale}__ == 'de' ? ${_material.nameDe} : ${_material.name}">
+                                            </option>
+                                        </datalist>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <div class="col-md-12">
+                                        <label for="inputEmail4"><span
+                                                th:text="#{label.editpage.tab3.electrical_error}">Electrical
+                                                    Failure</span><a href="#" data-toggle="tooltip" data-placement="top"
+                                                                     th:title="#{label.tooltip.electrical_error}"><i
+                                                class="fa fa-info-circle ml-1" aria-hidden="true"></i>
+                                        </a></label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control form-control-sm custom-select custom-select-sm"
+                                               type="text" th:field="*{sElectricalError}" list="e_error"
+                                               th:placeholder="#{label.search.placeholder.select.electric.error}"></input>
+                                        <datalist id="e_error">
+                                            <option th:each="_err: ${electricErrorList}"
+                                                    th:value="__${#locale}__ == 'de' ? ${_err.nameDe}  : ${_err.name}"
+                                                    th:text="__${#locale}__ == 'de' ? ${_err.nameDe}  : ${_err.name}">
+                                            </option>
+                                        </datalist>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <div class="col-md-12">
+                                        <label for="inputEmail4"><span
+                                                th:text="#{label.editpage.tab3.error_mode}">Failure
+                                                    Mode</span><a href="#" data-toggle="tooltip" data-placement="top"
+                                                                  th:title="#{label.tooltip.error_mode}"><i
+                                                class="fa fa-info-circle ml-1" aria-hidden="true"></i>
+                                        </a></label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control form-control-sm custom-select custom-select-sm"
+                                               type="text" th:field="*{sFailureMode}" list="e_mode"
+                                               th:placeholder="#{label.search.placeholder.select.e.mode}"></input>
+                                        <datalist id="e_mode">
+                                            <option th:each="_errorMode: ${failureModeList}"
+                                                    th:value="__${#locale}__ == 'de' ? ${_errorMode.nameDe} : ${_errorMode.name}"
+                                                    th:text="__${#locale}__ == 'de' ? ${_errorMode.nameDe} : ${_errorMode.name}">
+                                            </option>
+                                        </datalist>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <div class="col-md-12">
+                                        <label for="inputEmail4"><span
+                                                th:text="#{label.editpage.tab7.archive_wafer_box}">Archive
+											wafer box</span><a href="#" data-toggle="tooltip"
+                                                               data-placement="top"
+                                                               th:title="#{label.tooltip.archive_wafer_box}"><i
+                                                class="fa fa-info-circle ml-1" aria-hidden="true"></i> </a></label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control form-control-sm custom-select custom-select-sm" type="text"
+                                               th:field="*{sArchWaferBox}" list="archive_wf"
+                                               placeholder="Select Archive Wf.box"></input>
+                                        <datalist id="archive_wf">
+                                            <option th:each="_arch: ${archiveList}"
+                                                    th:value="__${#locale}__ == 'de' ? ${_arch.nameDe} : ${_arch.name}"
+                                                    th:text="__${#locale}__ == 'de' ? ${_arch.nameDe} : ${_arch.name}"></option>
+                                        </datalist>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <div class="col-md-12">
+                                        <label for="inputEmail4"><span
+                                                th:text="#{label.editpage.tab7.archive_polystyrene_box}">Archive
+											polystyrene box</span><a href="#" data-toggle="tooltip"
+                                                                     data-placement="top"
+                                                                     th:title="#{label.tooltip.archive_poly_box}"><i
+                                                class="fa fa-info-circle ml-1" aria-hidden="true"></i> </a></label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-control form-control-sm custom-select custom-select-sm" type="text"
+                                               th:field="*{sArchPolyBox}" list="archive_poly"
+                                               placeholder="Select Archive P.box"></input>
+                                        <datalist id="archive_poly">
+                                            <option th:each="_arch: ${archiveList}"
+                                                    th:value="__${#locale}__ == 'de' ? ${_arch.nameDe} : ${_arch.name}"
+                                                    th:text="__${#locale}__ == 'de' ? ${_arch.nameDe} : ${_arch.name}"></option>
+                                        </datalist>
+                                    </div>
+                                </div>
 
 
 
 
-                    <!-- 
-					<div class="row mb-5 justify-content-center">
-						<div class="col-lg-8 col-md-8 col-sm-12 p-0">
-							<div class="input-group">
-								<input id="search-inp" type="text"
-									class="form-control search-slt" placeholder="Search Your Order">
-								<span class="input-group-prepend">
-									<div class="input-group-text bg-transparent">
-										<i class="fa fa-search"></i>
-									</div>
-								</span>
-							</div>
-						</div>
-						
-					</div> -->
+                                <div class="alert alert-danger pull-right" th:if="${flash_searchresults}"
+                                     th:text="${flash_searchresults}"></div>
+                                <input type="hidden" id="ln" name="ln" th:value="__${#locale}__"></input> <input
+                                    type="hidden" id="pageSize" name="pageSize"
+                                    th:value="${#request.getParameter('pageSize')}"></input> <input type="hidden"
+                                                                                                    id="page" name="page" th:value="${#request.getParameter('page')}"></input>
+                                <input type="hidden" id="fromLink" name="fromLink"
+                                       th:value="${#request.getParameter('fromLink')}"></input>
+
+
+                                <div class="form-group col-md-3"></div>
+                                <div class="form-group col-md-3">
+                                    <!--<button type="submit" class="btn btnbgcolor">
+                                        <span th:text="#{label.Search}">Search</span>
+                                    </button>-->
+                                    <button type="button" class="btn btnbgcolor" id="search-button">
+                                        <span th:text="#{label.Search}">Search</span>
+                                    </button>
+
+                                    <a th:href="@{/orderdetails(fromLink=${'search'})}"><button type="button"
+                                                                                                class="btn btnbgcolor">
+                                        <span th:text="#{label.cancel}">Cancel</span>
+                                    </button></a>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </form>
                 </div>
-                <div class="row mb-3 text-center">
-                    <div class=" col-sm-12 col-md-4 text-md-left">
-                        <nav>
-                            <ol class="breadcrumb m-0 p-0 bg-white">
-                                <li class="breadcrumb-item"><a th:href="@{/home}"><span
-                                            th:text="#{label.home}">Home</span></a></li>
-                                <li class="breadcrumb-item active" aria-current="page"><span
-                                        th:text="#{label.orders}">Orders</span></li>
-                            </ol>
-                        </nav>
 
+
+
+
+                <!--
+                <div class="row mb-5 justify-content-center">
+                    <div class="col-lg-8 col-md-8 col-sm-12 p-0">
+                        <div class="input-group">
+                            <input id="search-inp" type="text"
+                                class="form-control search-slt" placeholder="Search Your Order">
+                            <span class="input-group-prepend">
+                                <div class="input-group-text bg-transparent">
+                                    <i class="fa fa-search"></i>
+                                </div>
+                            </span>
+                        </div>
                     </div>
-                    <div class="col-sm-12 col-md-4 text-md-center">
-                        <h5>
-                            <span th:text="#{label.listpage.orders_list}">Orders List</span>
-                        </h5>
-                    </div>
 
-                    <div class="col-sm-12 col-md-4 text-md-right">
-                        <a th:href="@{/orderdetails/create}"><button type="button" class="btn btn-sm btnbgcolor">
-                                <i class="fa fa-plus"></i> <span th:text="#{label.menupage.create_new_order}">Create a
-                                    new order </span>
-                            </button></a>
-                    </div>
-                </div>
-
-
-                <div sec:authorize="hasAuthority('SUPER-ADMIN')" id="div-super-admin"></div>
-                <input type="hidden" id="localeType" th:name="localeType" th:value="${#locale}"></input> <select
-                    style="display: none" id="pageSizeSelect">
-                    <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}"
-                        th:selected="${pageSize} == ${selectedPageSize}"></option>
-                </select> <input type="hidden" id="pageSizes" th:name="pageSizes" th:value="${pageSizes}"></input>
-                <input type="hidden" id="defaultPageSizes" th:name="defaultPageSizes"
-                    th:value="${defaultPageSize}"></input>
-                <div>
-                    <table id="table_order_1" class="table table-striped table-bordered nowrap" style="width: 100%">
-                        <thead>
-                            <tr role="row">
-                                <th th:text="#{table.header.action}">Action</th>
-                                <th th:text="#{table.header.order.no}">Order No</th>
-                                <th th:text="#{table.header.date}" class="justify-content-center text-center align-middle">Date</th>
-                                <th th:text="#{table.header.customer}" class="justify-content-center text-center align-middle">Customer</th>
-                                <th th:text="#{table.header.priority}">Priority</th>
-                                <th th:text="#{table.header.material}" class="justify-content-center text-center align-middle">Material</th>
-                                <th th:text="#{table.header.lot.id}" class="justify-content-center text-center align-middle">Lot-ID</th>
-                                <th th:text="#{table.header.part}" class="justify-content-center text-center align-middle">Part</th>
-                                <th th:text="#{table.header.analysis.reason}" class="justify-content-center text-center align-middle">Analysis Reason</th>
-                                <th th:text="#{table.header.electrical.error}" class="justify-content-center text-center align-middle">Electrical Failure</th>
-                                <th th:text="#{table.header.error.mode}" class="justify-content-center text-center align-middle">Failure Mode</th>
-                                <th th:text="#{table.header.fa.editor}" class="justify-content-center text-center align-middle">FA Editor</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-
+                </div> -->
             </div>
-            <input type="hidden" th:value='#{label.button.csv}' id='csvButtonText'> <input type="hidden"
-                th:value='#{label.button.print}' id='printButtonText'> <input type="hidden"
-                th:value='#{label.button.copy}' id='copyButtonText'>
-            <input type="hidden" th:value='#{label.Search}' id='searchBoxText'>
-            <br />
+            <div class="row mb-3 text-center">
+                <div class=" col-sm-12 col-md-4 text-md-left">
+                    <nav>
+                        <ol class="breadcrumb m-0 p-0 bg-white">
+                            <li class="breadcrumb-item"><a th:href="@{/home}"><span
+                                    th:text="#{label.home}">Home</span></a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><span
+                                    th:text="#{label.orders}">Orders</span></li>
+                        </ol>
+                    </nav>
+
+                </div>
+                <div class="col-sm-12 col-md-4 text-md-center">
+                    <h5>
+                        <span th:text="#{label.listpage.orders_list}">Orders List</span>
+                    </h5>
+                </div>
+
+                <div class="col-sm-12 col-md-4 text-md-right">
+                    <a th:href="@{/orderdetails/create}"><button type="button" class="btn btn-sm btnbgcolor">
+                        <i class="fa fa-plus"></i> <span th:text="#{label.menupage.create_new_order}">Create a
+                                    new order </span>
+                    </button></a>
+                </div>
+            </div>
+
+
+            <div sec:authorize="hasAuthority('SUPER-ADMIN')" id="div-super-admin"></div>
+            <input type="hidden" id="localeType" th:name="localeType" th:value="${#locale}"></input> <select
+                style="display: none" id="pageSizeSelect">
+            <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}"
+                    th:selected="${pageSize} == ${selectedPageSize}"></option>
+        </select> <input type="hidden" id="pageSizes" th:name="pageSizes" th:value="${pageSizes}"></input>
+            <input type="hidden" id="defaultPageSizes" th:name="defaultPageSizes"
+                   th:value="${defaultPageSize}"></input>
+            <div>
+                <table id="table_order_1" class="table table-striped table-bordered nowrap" style="width: 100%">
+                    <thead>
+                    <tr role="row">
+                        <th th:text="#{table.header.action}">Action</th>
+                        <th th:text="#{table.header.order.no}">Order No</th>
+                        <th th:text="#{table.header.date}" class="justify-content-center text-center align-middle">Date</th>
+                        <th th:text="#{table.header.customer}" class="justify-content-center text-center align-middle">Customer</th>
+                        <th th:text="#{table.header.priority}">Priority</th>
+                        <th th:text="#{table.header.material}" class="justify-content-center text-center align-middle">Material</th>
+                        <th th:text="#{table.header.lot.id}" class="justify-content-center text-center align-middle">Lot-ID</th>
+                        <th th:text="#{table.header.part}" class="justify-content-center text-center align-middle">Part</th>
+                        <th th:text="#{table.header.analysis.reason}" class="justify-content-center text-center align-middle">Analysis Reason</th>
+                        <th th:text="#{table.header.electrical.error}" class="justify-content-center text-center align-middle">Electrical Failure</th>
+                        <th th:text="#{table.header.error.mode}" class="justify-content-center text-center align-middle">Failure Mode</th>
+                        <th th:text="#{table.header.fa.editor}" class="justify-content-center text-center align-middle">FA Editor</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
 
         </div>
-        <script th:inline="javascript">
+        <input type="hidden" th:value='#{label.button.csv}' id='csvButtonText'> <input type="hidden"
+                                                                                       th:value='#{label.button.print}' id='printButtonText'> <input type="hidden"
+                                                                                                                                                     th:value='#{label.button.copy}' id='copyButtonText'>
+        <input type="hidden" th:value='#{label.Search}' id='searchBoxText'>
+        <br />
+
+    </div>
+    <script th:inline="javascript">
 
             function getUrlParameter(name) {
                 var result = "";
@@ -419,7 +419,7 @@
 
             var orderDataTable = $('#table_order_1').DataTable({
                 orderCellsTop: true,
-                //fixedHeader: true, 
+                //fixedHeader: true,
                 "searching": true,
                 "scrollY": '50vh',
                 "scrollX": true,
@@ -439,9 +439,10 @@
                     //'url': 'orders',
                     'type': 'POST',
                     'data': function (d) {
+                          console.log(d);
                         d.externalFilter = criteria;
                         d.externalFilter.sourceLink = getUrlParameter('fromLink');
-                        //console.log("======="+JSON.stringify(d));
+                        console.log("======="+JSON.stringify(d));
                         return JSON.stringify(d);
                     }
                 },
@@ -519,7 +520,7 @@
                     },
                     {
                     	//console.log("======="+JSON.stringify(d));
-                    	
+
                         /* "title": 'Date', */
                         "data": "dbs_fa_date",
                         //"render": $.fn.dataTable.render.moment('DD/MM/YYYY', 'MM-DD-YYYY'),
@@ -613,7 +614,7 @@
                                 .on('change', function (e) {
                                     // Get the search value
                                     $(this).attr('title', $(this).val());
-                                    var regexr = '({search})'; 
+                                    var regexr = '({search})';
 
                                     var cursorPosition = this.selectionStart;
                                     // Search the column for that value
@@ -642,7 +643,7 @@
                 }
 
             });
-            
+
             $("#table_order_1_filter input").unbind()
                 .bind("input", function (e) {
                     if (this.value.length >= 1 || e.keyCode == 13) {
@@ -662,7 +663,7 @@
 
         </script>
 
-    </div>
+</div>
 </body>
 
 </html>
